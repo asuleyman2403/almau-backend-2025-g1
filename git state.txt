@@ -2,3 +2,6 @@
 2) Staged - code to be committed
 3) Committed - saved code
 4) Pushed - saved to remote git repository (github)
+
+
+SOME CHANGES
