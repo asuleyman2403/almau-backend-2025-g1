@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Index page</title>
+</head>
+<body>
+<h1>Main page</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <td>
+            ID
+        </td>
+        <td>
+            TITLE
+        </td>
+        <td>
+            AMOUNT
+        </td>
+        <td>
+            PRICE
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.amount }}</td>
+        <td>{{ product.price }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
