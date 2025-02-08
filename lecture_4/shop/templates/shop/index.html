@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block head %}
+<title>Index page</title>
+<style>
+  .text-danger {
+    color: red;
+  }
+</style>
+{% endblock %} {% block content %} {% include 'header.html' %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-8 offset-2 my-2">
+      <h1>Main page</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      {% if error|length > 0 %}
+      <p style="color: red">{{ error }}</p>
+      {% endif %}
+    </div>
+    <div class="col-8 offset-2">
+      <form action="{% url 'products_page' %}" method="POST">
+        {% csrf_token %} {% for field in form %}
+        <div class="mb-2">
+          <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+          {{ field }}
+          <div class="text-danger">{{ field.errors }}</div>
+        </div>
+        {% endfor %}
+        <div class="w-full d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary">Create Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8 offset-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>TITLE</td>
+            <td>AMOUNT</td>
+            <td>PRICE</td>
+            <td>ACTIONS</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.title }}</td>
+            <td>{{ product.amount }}</td>
+            <td>{{ product.price }}</td>
+            <td>
+              <a href="{% url 'remove_product' pk=product.id %}">
+                <button class="btn btn-danger">Delete</button>
+              </a>
+              <button class="btn btn-primary" disabled>Edit</button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% include 'footer.html' %} {% endblock %}
